@@ -1,0 +1,32 @@
+﻿using UnityEngine;
+
+public class GameController : MonoBehaviour {
+
+	public static GameController instance;
+	public bool gameOver = false;
+	public float scrollSpeed = -3f;
+	public bool shipControl;
+	public float blockSize;
+
+	//private GameObject block;
+
+	void Awake() {
+		if (instance == null) {
+			instance = this;
+		} else if (instance != this) {
+			Destroy(gameObject);
+		}
+
+		//block = (GameObject)Resources.Load("Player/MainEngine", typeof(GameObject));
+	}
+
+	void Start () {
+		//blockSize = block.GetComponent<BoxCollider2D>().size.x;
+	}
+	
+	void Update () {
+		if (Input.GetKeyDown("space")) {
+			Debug.Log(blockSize);
+		}
+	}
+}

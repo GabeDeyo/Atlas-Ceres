@@ -1,0 +1,13 @@
+***********************
+PLAYER TODO LIST
+***********************
+. Get Player Classes setup
+. Ship Levels
+. Get timed boost working
+. Finish Player Controller
+. Gun Controls
+. Booster Controls
+. Block animations
+. Entry Sequence
+. Starting Ship Algorithm
+...

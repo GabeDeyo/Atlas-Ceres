@@ -1,0 +1,7 @@
+***********************
+ENVIRONMENT TODO LIST
+***********************
+1. Work on endless background
+2. Schedule Wall instantiation with Ship entry
+3. Aesthetic material
+4....
