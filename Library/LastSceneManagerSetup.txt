@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/ExpansionStaging.unity
+- path: Assets/Scenes/NewShipStaging.unity
   isLoaded: 1
   isActive: 1
