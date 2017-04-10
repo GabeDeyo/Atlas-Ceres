@@ -23,21 +23,22 @@ public class Meld_3D : MonoBehaviour {
 		
 		Collider[] colliders = Physics.OverlapSphere(transform.position, detectionRadius, 1 << playerMask);
 		for(var i = 0; i < colliders.Length; i++) {
-			Debug.Log(colliders[i]);
 			FixedJoint fj = gameObject.AddComponent<FixedJoint>();
 			fj.connectedBody = colliders[i].GetComponent<Rigidbody>();
+		}
+
+		if (transform.name.Contains("Gun")) {
+			GetComponent<Gun_3D>().isAttached = true;
 		}
 
 		transform.parent = player.transform;
 		gameObject.tag = "Player";
 		gameObject.layer = 8;
 
-		//StartCoroutine(stopScript());
 		stopScript();
 	}
 
 	private void stopScript() {
-		//yield return new WaitForSeconds(1);
 		transform.rotation = Quaternion.identity;
 		GetComponent<Floater_3D>().enabled = false;
 		GetComponent<Meld_3D>().enabled = false;

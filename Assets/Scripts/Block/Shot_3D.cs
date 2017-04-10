@@ -19,7 +19,7 @@ public class Shot_3D : MonoBehaviour {
 	}
 
 	private void OnTriggerEnter(Collider other) {
-		if (other.tag == "Enemy") {
+		if (other.tag == "Enemy" && other.GetComponent<BlockHealth_3D>() != null) {
 			other.GetComponent<BlockHealth_3D>().TakeDamage(1);
 			Destroy(gameObject);
 		}
