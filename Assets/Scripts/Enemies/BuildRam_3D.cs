@@ -24,36 +24,63 @@ public class BuildRam_3D : MonoBehaviour {
 
 		sizeOffset = GameController_3D.instance.blockSize;
 
-		GameObject main = Instantiate(engine, new Vector3(-5, 0, 1), Quaternion.identity) as GameObject;
-		float posX = main.transform.position.x;
-		float posY = main.transform.position.y;
+		GameObject RamObject = new GameObject();
+		RamObject.name = "Ram";
 
-		main.name = "Ram";
-		main.layer = 11;
+		GameObject mainEngine = Instantiate(engine, new Vector3(-5, 0, 0), Quaternion.identity) as GameObject;
+		float posX = mainEngine.transform.position.x;
+		float posY = mainEngine.transform.position.y;
+		float z = 0;
+
+		mainEngine.transform.parent = RamObject.transform;
+		mainEngine.tag = "Enemy";
+		mainEngine.layer = 11;
 
 		//First Iteration
-		GameObject booster1 = Instantiate(booster, new Vector3(posX, posY + sizeOffset, 1), Quaternion.identity) as GameObject;
-		booster1.transform.parent = main.transform;
+		GameObject booster1 = Instantiate(booster, new Vector3(posX, posY + sizeOffset, z), Quaternion.identity) as GameObject;
+		FixedJoint fj_boost1 = booster1.AddComponent<FixedJoint>();
+		fj_boost1.connectedBody = mainEngine.GetComponent<Rigidbody>();
+		booster1.transform.parent = RamObject.transform;
+		booster1.tag = "Enemy";
 		booster1.layer = 11;
 
-		GameObject armor1 = Instantiate(armor, new Vector3(posX - sizeOffset, posY, 1), Quaternion.identity) as GameObject;
-		armor1.transform.parent = main.transform;
+		GameObject armor1 = Instantiate(armor, new Vector3(posX - sizeOffset, posY, z), Quaternion.identity) as GameObject;
+		FixedJoint fj_armor1 = armor1.AddComponent<FixedJoint>();
+		fj_armor1.connectedBody = mainEngine.GetComponent<Rigidbody>();
+		armor1.transform.parent = RamObject.transform;
+		armor1.tag = "Enemy";
 		armor1.layer = 11;
 
-		GameObject armor2 = Instantiate(armor, new Vector3(posX + sizeOffset, posY, 1), Quaternion.identity) as GameObject;
-		armor2.transform.parent = main.transform;
+		GameObject armor2 = Instantiate(armor, new Vector3(posX + sizeOffset, posY, z), Quaternion.identity) as GameObject;
+		FixedJoint fj_armor2 = armor2.AddComponent<FixedJoint>();
+		fj_armor2.connectedBody = mainEngine.GetComponent<Rigidbody>();
+		armor2.transform.parent = RamObject.transform;
+		armor2.tag = "Enemy";
 		armor2.layer = 11;
 
-		GameObject armor3 = Instantiate(armor, new Vector3(posX, posY - sizeOffset, 1), Quaternion.identity) as GameObject;
-		armor3.transform.parent = main.transform;
+		GameObject armor3 = Instantiate(armor, new Vector3(posX, posY - sizeOffset, z), Quaternion.identity) as GameObject;
+		FixedJoint fj_armor3 = armor3.AddComponent<FixedJoint>();
+		fj_armor3.connectedBody = mainEngine.GetComponent<Rigidbody>();
+		armor3.transform.parent = RamObject.transform;
+		armor3.tag = "Enemy";
 		armor3.layer = 11;
 
-		GameObject armor4 = Instantiate(armor, new Vector3(posX - sizeOffset, posY - sizeOffset, 1), Quaternion.identity) as GameObject;
-		armor4.transform.parent = armor3.transform;
+		GameObject armor4 = Instantiate(armor, new Vector3(posX - sizeOffset, posY - sizeOffset, z), Quaternion.identity) as GameObject;
+		FixedJoint fj_armor4_a = armor4.AddComponent<FixedJoint>();
+		fj_armor4_a.connectedBody = armor2.GetComponent<Rigidbody>();
+		FixedJoint fj_armor4_b = armor4.AddComponent<FixedJoint>();
+		fj_armor4_b.connectedBody = armor3.GetComponent<Rigidbody>();
+		armor4.transform.parent = RamObject.transform;
+		armor4.tag = "Enemy";
 		armor4.layer = 11;
 
-		GameObject armor5 = Instantiate(armor, new Vector3(posX + sizeOffset, posY - sizeOffset, 1), Quaternion.identity) as GameObject;
-		armor5.transform.parent = armor3.transform;
+		GameObject armor5 = Instantiate(armor, new Vector3(posX + sizeOffset, posY - sizeOffset, z), Quaternion.identity) as GameObject;
+		FixedJoint fj_armor5_a = armor5.AddComponent<FixedJoint>();
+		fj_armor5_a.connectedBody = armor2.GetComponent<Rigidbody>();
+		FixedJoint fj_armor5_b = armor5.AddComponent<FixedJoint>();
+		fj_armor5_b.connectedBody = armor3.GetComponent<Rigidbody>();
+		armor5.transform.parent = RamObject.transform;
+		armor5.tag = "Enemy";
 		armor5.layer = 11;
 	}
 }

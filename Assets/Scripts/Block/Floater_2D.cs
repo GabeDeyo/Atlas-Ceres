@@ -2,16 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Floater_3D : MonoBehaviour {
+public class Floater_2D : MonoBehaviour {
 
 	public float slideSpeed;
 	public float overTime;
-
-	private MeshRenderer meshRenderer;
-
-	private void Awake() {
-		meshRenderer = GetComponent<MeshRenderer>();
-	}
 
 	private void OnCollisionEnter(Collision collision) {
 		if (collision.gameObject.name == "Player") {

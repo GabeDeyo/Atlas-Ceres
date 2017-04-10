@@ -81,8 +81,13 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Block\BlockHealth_3D.cs" />
+    <Compile Include="Assets\Scripts\Block\Floater_2D.cs" />
+    <Compile Include="Assets\Scripts\Block\Floater_3D.cs" />
     <Compile Include="Assets\Scripts\Block\Gun_2D.cs" />
     <Compile Include="Assets\Scripts\Block\Gun_3D.cs" />
+    <Compile Include="Assets\Scripts\Block\Magnet_3D.cs" />
+    <Compile Include="Assets\Scripts\Block\Magnet_Collide_3D.cs" />
     <Compile Include="Assets\Scripts\Block\Meld_2D.cs" />
     <Compile Include="Assets\Scripts\Block\Meld_3D.cs" />
     <Compile Include="Assets\Scripts\Block\Shot_2D.cs" />
@@ -115,12 +120,12 @@
     <Compile Include="Assets\Scripts\Environment\TiledBackground_3D.cs" />
     <Compile Include="Assets\Scripts\Environment\Wall_2D.cs" />
     <Compile Include="Assets\Scripts\Environment\Wall_3D.cs" />
+    <Compile Include="Assets\Scripts\Extras\Breathe.cs" />
+    <Compile Include="Assets\Scripts\Extras\LerpTesting.cs" />
     <Compile Include="Assets\Scripts\GameController_2D.cs" />
     <Compile Include="Assets\Scripts\GameController_3D.cs" />
     <Compile Include="Assets\Scripts\Ship\Enter_2D.cs" />
     <Compile Include="Assets\Scripts\Ship\Enter_3D.cs" />
-    <Compile Include="Assets\Scripts\Ship\Floater_2D.cs" />
-    <Compile Include="Assets\Scripts\Ship\Floater_3D.cs" />
     <Compile Include="Assets\Scripts\Ship\GeneratePlayer_2D.cs" />
     <Compile Include="Assets\Scripts\Ship\GeneratePlayer_3D.cs" />
     <Compile Include="Assets\Scripts\Ship\ShipController_2D.cs" />
@@ -131,6 +136,7 @@
     <Compile Include="Assets\Scripts\Ship\Ship_3D.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\KY_effects\MagicEffectsPackFree\ReadMe.txt" />
     <None Include="Assets\Resources\Block\PLAYER_TODO.txt" />
     <None Include="Assets\Resources\Environment\ENVIRONMENT_TODO.txt" />
     <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />

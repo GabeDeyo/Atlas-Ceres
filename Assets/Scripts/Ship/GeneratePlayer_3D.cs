@@ -9,6 +9,7 @@ public class GeneratePlayer_3D : MonoBehaviour {
 	private GameObject armor;
 	private GameObject gun;
 	private GameObject booster;
+	private GameObject magnet;
 
 	private float sizeOffset;
 
@@ -17,6 +18,8 @@ public class GeneratePlayer_3D : MonoBehaviour {
 		armor = (GameObject)Resources.Load ("Block/Armor_3D", typeof(GameObject));
 		gun = (GameObject)Resources.Load ("Block/Gun_3D", typeof(GameObject));
 		booster = (GameObject)Resources.Load ("Block/Booster_3D", typeof(GameObject));
+
+		magnet = (GameObject)Resources.Load("Block/Magnet_3D", typeof(GameObject));
 
 		sizeOffset = engine.GetComponent<BoxCollider>().size.x;
 	}
@@ -44,8 +47,6 @@ public class GeneratePlayer_3D : MonoBehaviour {
 		enter.slowTime = 3;
 
 		mainEngine.AddComponent<ShipController_3D>();
-
-		mainEngine.name = "Engine";
 		mainEngine.layer = 8;
 
 		GameObject gun1 = Instantiate(gun, new Vector3(posX, posY + sizeOffset, z), Quaternion.identity) as GameObject;
@@ -55,6 +56,9 @@ public class GeneratePlayer_3D : MonoBehaviour {
 		gun1.tag = "Player";
 		gun1.layer = 8;
 		gun1.GetComponent<Gun_3D>().isAttached = true;
+
+		/*GameObject magnet_1 = Instantiate(magnet, new Vector3(gun1.transform.position.x, gun1.transform.position.y + sizeOffset, z), Quaternion.identity) as GameObject;
+		magnet_1.transform.parent = gun1.transform;*/
 
 		GameObject armor1 = Instantiate(armor, new Vector3(posX - sizeOffset, posY, z), Quaternion.identity) as GameObject;
 		FixedJoint fj_armor1 = armor1.AddComponent<FixedJoint>();

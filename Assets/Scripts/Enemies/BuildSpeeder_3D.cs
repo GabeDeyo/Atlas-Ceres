@@ -26,29 +26,64 @@ public class BuildSpeeder_3D : MonoBehaviour {
 
 		sizeOffset = GameController_3D.instance.blockSize;
 
-		GameObject main = Instantiate(engine, new Vector3(0, 5, 1), Quaternion.identity) as GameObject;
-		float posX = main.transform.position.x;
-		float posY = main.transform.position.y;
+		GameObject SpeederObject = new GameObject();
+		SpeederObject.name = "Speeder";
 
-		main.name = "Speeder";
+		float z = 0;
+
+		GameObject mainEngine = Instantiate(engine, new Vector3(0, 5, z), Quaternion.identity) as GameObject;
+		float posX = mainEngine.transform.position.x;
+		float posY = mainEngine.transform.position.y;
+
+		mainEngine.transform.parent = SpeederObject.transform;
+		mainEngine.tag = "Enemy";
+		mainEngine.layer = 11;
 
 		//First Iteration
-		GameObject booster1 = Instantiate(booster, new Vector3(posX, posY + sizeOffset, 1), Quaternion.identity) as GameObject;
-		booster1.transform.parent = main.transform;
+		GameObject booster1 = Instantiate(booster, new Vector3(posX, posY + sizeOffset, z), Quaternion.identity) as GameObject;
+		FixedJoint fj_boost1 = booster1.AddComponent<FixedJoint>();
+		fj_boost1.connectedBody = mainEngine.GetComponent<Rigidbody>();
+		booster1.transform.parent = SpeederObject.transform;
+		booster1.tag = "Enemy";
+		booster1.layer = 11;
 
-		GameObject armor1 = Instantiate(armor, new Vector3(posX - sizeOffset, posY, 1), Quaternion.identity) as GameObject;
-		armor1.transform.parent = main.transform;
+		GameObject armor1 = Instantiate(armor, new Vector3(posX - sizeOffset, posY, z), Quaternion.identity) as GameObject;
+		FixedJoint fj_armor1 = armor1.AddComponent<FixedJoint>();
+		fj_armor1.connectedBody = mainEngine.GetComponent<Rigidbody>();
+		armor1.transform.parent = SpeederObject.transform;
+		armor1.tag = "Enemy";
+		armor1.layer = 11;
 
-		GameObject booster2 = Instantiate(booster, new Vector3(posX - sizeOffset, posY + sizeOffset, 1), Quaternion.identity) as GameObject;
-		booster2.transform.parent = armor1.transform;
+		GameObject booster2 = Instantiate(booster, new Vector3(posX - sizeOffset, posY + sizeOffset, z), Quaternion.identity) as GameObject;
+		FixedJoint fj_boost2_a = booster2.AddComponent<FixedJoint>();
+		fj_boost2_a.connectedBody = armor1.GetComponent<Rigidbody>();
+		FixedJoint fj_boost2_b = booster2.AddComponent<FixedJoint>();
+		fj_boost2_b.connectedBody = booster1.GetComponent<Rigidbody>();
+		booster2.transform.parent = SpeederObject.transform;
+		booster2.tag = "Enemy";
+		booster2.layer = 11;
 
-		GameObject armor2 = Instantiate(armor, new Vector3(posX + sizeOffset, posY, 1), Quaternion.identity) as GameObject;
-		armor2.transform.parent = main.transform;
+		GameObject armor2 = Instantiate(armor, new Vector3(posX + sizeOffset, posY, z), Quaternion.identity) as GameObject;
+		FixedJoint fj_armor2 = armor2.AddComponent<FixedJoint>();
+		fj_armor2.connectedBody = mainEngine.GetComponent<Rigidbody>();
+		armor2.transform.parent = SpeederObject.transform;
+		armor2.tag = "Enemy";
+		armor2.layer = 11;
 
-		GameObject booster3 = Instantiate(booster, new Vector3(posX + sizeOffset, posY + sizeOffset, 1), Quaternion.identity) as GameObject;
-		booster3.transform.parent = armor2.transform;
+		GameObject booster3 = Instantiate(booster, new Vector3(posX + sizeOffset, posY + sizeOffset, z), Quaternion.identity) as GameObject;
+		FixedJoint fj_boost3_a = booster3.AddComponent<FixedJoint>();
+		fj_boost3_a.connectedBody = booster1.GetComponent<Rigidbody>();
+		FixedJoint fj_boost3_b = booster3.AddComponent<FixedJoint>();
+		fj_boost3_b.connectedBody = armor2.GetComponent<Rigidbody>();
+		booster3.transform.parent = SpeederObject.transform;
+		booster3.tag = "Enemy";
+		booster3.layer = 11;
 
-		GameObject gun1 = Instantiate(gun, new Vector3(posX, posY - sizeOffset, 1), Quaternion.identity) as GameObject;
-		gun1.transform.parent = main.transform;
+		GameObject gun1 = Instantiate(gun, new Vector3(posX, posY - sizeOffset, z), Quaternion.identity) as GameObject;
+		FixedJoint fj_gun1 = gun1.AddComponent<FixedJoint>();
+		fj_gun1.connectedBody = mainEngine.GetComponent<Rigidbody>();
+		gun1.transform.parent = SpeederObject.transform;
+		gun1.tag = "Enemy";
+		gun1.layer = 11;
 	}
 }

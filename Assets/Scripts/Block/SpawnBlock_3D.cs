@@ -29,14 +29,11 @@ public class SpawnBlock_3D : MonoBehaviour {
 	}
 
 	void InstantiateBlock() {
-		GameObject block = Instantiate(prefabs[Random.Range(0, 3)], new Vector3(0, 0, 1), Quaternion.identity) as GameObject;
+		GameObject block = Instantiate(prefabs[Random.Range(0, 3)], new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
+		block.tag = "Floater";
 		block.layer = 10;
 
+		block.AddComponent<Floater_3D>();
 		block.AddComponent<Meld_3D>();
-
-		Rigidbody rb = block.AddComponent<Rigidbody>();
-		//rb.gravityScale = Random.Range(0.01f, 0.1f);
-
-		//rb.AddTorque(Random.Range(-3, 3));
 	}
 }

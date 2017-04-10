@@ -13,7 +13,16 @@ public class Gun_3D : MonoBehaviour {
 
 	void Awake() {
 		shot = (GameObject)Resources.Load("Block/Bolt_3D", typeof(GameObject));
-		shot.layer = 8;
+	}
+
+	private void Start() {
+		if(transform.tag == "Player") {
+			shot.tag = "Player";
+			shot.layer = 8;
+		}else {
+			shot.tag = "Enemy";
+			shot.layer = 11;
+		}
 	}
 
 	void Update() {

@@ -1,67 +1,45 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class Meld_3D : MonoBehaviour {
 
-	private Expand_3D expand;
-	private FixedJoint joint;
+	public float detectionRadius = 0.6f;
+
+	private int playerMask = 8;
+	private GameObject player;
 
 	void Awake() {
-		//expand = GameObject.Find("EnvironmentManager").GetComponent<Expand_3D>();
+		if(GameObject.Find("Player") != null) {
+			player = GameObject.Find("Player");
+		}
 	}
 
-	void OnCollisionEnter(Collision collision) {
-		if(collision.gameObject.name == "Player") {
-			ContactPoint contact = collision.contacts[0];
+	public void StartConnect(GameObject magnet) {
+		StartCoroutine(Connect(magnet));
+	}
 
-			Destroy(gameObject.GetComponent<Rigidbody>());
-
-			if (this.gameObject.GetComponent<Gun_3D>()) {
-				this.gameObject.GetComponent<Gun_3D>().isAttached = true;
-			}
-
-			transform.parent = collision.transform;
-			//gameObject.transform.SetParent(c.collider.transform);
-
-			gameObject.tag = "Player";
-			gameObject.layer = 8;
-
-			float posX = gameObject.transform.localPosition.x;
-			float posY = gameObject.transform.localPosition.y;
-			float posZ = gameObject.transform.localPosition.z;
-
-			gameObject.transform.localPosition = new Vector3(Mathf.RoundToInt(posX), Mathf.RoundToInt(posY), Mathf.RoundToInt(posZ));
-			gameObject.transform.localRotation = collision.transform.rotation;
-
-			GameController_3D.instance.shipSize++;
-			//expand.timer = 0;
+	private IEnumerator Connect(GameObject magnet) {
+		yield return new WaitForSeconds(0.5f);
+		
+		Collider[] colliders = Physics.OverlapSphere(transform.position, detectionRadius, 1 << playerMask);
+		for(var i = 0; i < colliders.Length; i++) {
+			Debug.Log(colliders[i]);
+			FixedJoint fj = gameObject.AddComponent<FixedJoint>();
+			fj.connectedBody = colliders[i].GetComponent<Rigidbody>();
 		}
-		/*foreach(ContactPoint c in target.contacts) {
-			if(c.collider.tag == "Player") {
-				Destroy(this.gameObject.GetComponent<Rigidbody2D>());
-				joint = this.gameObject.AddComponent<FixedJoint2D>();
-				joint.enableCollision = true;
-				this.gameObject.transform.localRotation = Quaternion.identity;
-				joint.connectedBody = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
-				joint.anchor = new Vector2(Mathf.RoundToInt(joint.anchor.x), Mathf.RoundToInt(joint.anchor.y));
-				
-				if (this.gameObject.GetComponent<Gun_3D>()) {
-					this.gameObject.GetComponent<Gun_3D>().isAttached = true;
-				}
 
-				this.gameObject.transform.SetParent(c.collider.transform);
+		transform.parent = player.transform;
+		gameObject.tag = "Player";
+		gameObject.layer = 8;
 
-				this.gameObject.tag = "Player";
-				this.gameObject.layer = 8;
+		//StartCoroutine(stopScript());
+		stopScript();
+	}
 
-				float posX = this.gameObject.transform.localPosition.x;
-				float posY = this.gameObject.transform.localPosition.y;
-
-				this.gameObject.transform.localPosition = new Vector2(Mathf.RoundToInt(posX), Mathf.RoundToInt(posY));
-				this.gameObject.transform.localRotation = Quaternion.identity;
-				
-				GameController.instance.shipSize++;
-				expand.timer = 0;
-			}
-		}*/
+	private void stopScript() {
+		//yield return new WaitForSeconds(1);
+		transform.rotation = Quaternion.identity;
+		GetComponent<Floater_3D>().enabled = false;
+		GetComponent<Meld_3D>().enabled = false;
 	}
 }

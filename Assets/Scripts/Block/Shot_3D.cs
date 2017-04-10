@@ -18,10 +18,10 @@ public class Shot_3D : MonoBehaviour {
 		Destroy(gameObject, 2f);
 	}
 
-	void OnCollisionEnter(Collision other) {
-		if(other.gameObject.layer == 11) {
-			Destroy(this.gameObject);
-			Destroy(other.gameObject);
+	private void OnTriggerEnter(Collider other) {
+		if (other.tag == "Enemy") {
+			other.GetComponent<BlockHealth_3D>().TakeDamage(1);
+			Destroy(gameObject);
 		}
 	}
 }
